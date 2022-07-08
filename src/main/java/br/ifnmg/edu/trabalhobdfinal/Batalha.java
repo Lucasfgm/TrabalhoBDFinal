@@ -8,7 +8,7 @@ package br.ifnmg.edu.trabalhobdfinal;
  *
  * @author lucas
  */
-public class Batalha {
+public class Batalha extends Entidade {
     
     private String nomeGuerra;
     private String nome;

@@ -31,7 +31,7 @@ public abstract class DAO<E, K>
             // Inserir novo registro
             // try-with-resources
             try ( PreparedStatement preparedStatement
-                    = ConexaoBd.getConexao().prepareStatement(
+                    = ConexaoBD.getConexao().prepareStatement(
                             obterSentencaInsert(),
                             Statement.RETURN_GENERATED_KEYS)) {
 
@@ -61,7 +61,7 @@ public abstract class DAO<E, K>
         } else {
             // Atualizar registro existente
             try ( PreparedStatement preparedStatement
-                    = ConexaoBd.getConexao().prepareStatement(
+                    = ConexaoBD.getConexao().prepareStatement(
                             obterSentencaUpdate())) {
 
                 // Monta a declaração SQL com os dados (->?)
@@ -92,7 +92,7 @@ public abstract class DAO<E, K>
      */
     public E localizarPorId(K id) {
         try ( PreparedStatement preparedStatement
-                = ConexaoBd.getConexao().prepareStatement(obterSentencaLocalizarPorId())) {
+                = ConexaoBD.getConexao().prepareStatement(obterSentencaLocalizarPorId())) {
 
             // Substitui respectiva id na sentença SQL
             preparedStatement.setLong(1, (Long) id);
@@ -121,7 +121,7 @@ public abstract class DAO<E, K>
         ArrayList<E> resposta = new ArrayList<>();
         
         try ( PreparedStatement preparedStatement
-                = ConexaoBd.getConexao().prepareStatement(obterSentencaLocalizarTodos())) {
+                = ConexaoBD.getConexao().prepareStatement(obterSentencaLocalizarTodos())) {
             
             // Recupera os dados da consulta
             ResultSet resultSet
@@ -157,7 +157,7 @@ public abstract class DAO<E, K>
         if (id != null && id != 0) {
             // ... tenta preparar uma sentença SQL para a conexão já estabelecida
             try (PreparedStatement pstmt
-                    = ConexaoBd.getConexao().prepareStatement(
+                    = ConexaoBD.getConexao().prepareStatement(
                             // Sentença SQL para exclusão de registros
                             getDeclaracaoDelete())) {
 
@@ -196,7 +196,7 @@ public abstract class DAO<E, K>
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(Dao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -256,7 +256,7 @@ public abstract class DAO<E, K>
         if (id != null && id != 0) {
             // ... tenta preparar uma sentença SQL para a conexão já estabelecida
             try (PreparedStatement pstmt
-                    = ConexaoBd.getConexao().prepareStatement(
+                    = ConexaoBD.getConexao().prepareStatement(
                             // Sentença SQL para exclusão de registros
                             obterSentencaMoverParaLixeira())) {
 
